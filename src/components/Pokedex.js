@@ -3,12 +3,16 @@ import Pokemon from "./Pokemon";
 
 const Pokedex = (props) => {
   
-  const { pokemons, loading, page, totalPages, onLeftClick, onRightClick } = props;
+  const { pokemons, loading, page, totalPages, setPage, onLeftClick, onRightClick } = props;
   const onLeftClickHandler = () => {
-    console.log("volta")
+    if(page > 0){
+        setPage(page-1)
+    }
   }
   const onRightClickHandler = () => {
-    console.log("avanca")
+    if(page+1 !== totalPages){
+        setPage(page+1)
+    }
   }
   return (
     <div>
@@ -16,8 +20,8 @@ const Pokedex = (props) => {
         <h1>Pokedex</h1>
         <Pagination page={page+1}
         totalPages={totalPages}
-        onLeftClick={onLeftClick}
-        onRightClick={onRightClick}/>
+        onLeftClick={onLeftClickHandler}
+        onRightClick={onRightClickHandler}/>
       </div>
       {loading ? (
         <div> Carregando.....</div>
